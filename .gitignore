@@ -1,6 +1,7 @@
 # Track only my own project and lab work
 /*
 !/.gitignore
+!/README.md
 !/dataproj1/
 /dataproj1/*
 !/dataproj1/Project_1/
