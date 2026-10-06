@@ -1,7 +1,31 @@
-# Data Warehouse Design on AdventureWorksDW2014 (CprE/SE 4140)
+<div align="center">
 
-A multidimensional data warehouse design, its implementation as a SQL Server Analysis Services (SSAS) cube, and MDX queries against it.
+# DATA WAREHOUSE DESIGN
 
+### From nine requirements to a cube you can query
+
+**SQL Server · SSAS · MDX**
+
+![Database](https://img.shields.io/badge/Database-SQL%20Server-6366F1?style=flat-square)
+![Cube](https://img.shields.io/badge/Cube-SSAS%20multidimensional-0F172A?style=flat-square)
+![Queries](https://img.shields.io/badge/Queries-MDX-0891B2?style=flat-square)
+![Stage](https://img.shields.io/badge/Stage-In%20progress-F59E0B?style=flat-square)
+
+Iowa State University · CprE/SE 4140 · Fall 2026
+
+[Overview](#overview) · [Cube structure](#cube-structure) · [My role](#my-role) · [Results](#results) · [Limitations](#limitations-and-next-steps)
+
+</div>
+
+---
+
+> **Where it stands — Project 1 and Lab 3 complete**  
+> A multidimensional model of AdventureWorksDW2014, implemented as an SSAS cube and queried with MDX.  
+> The course is ongoing; later labs will be added.
+
+| Measure groups | Dimensions | Requirements covered | Date roles |
+| :---: | :---: | :---: | :---: |
+| **2** | **8** | **9 / 9** | **3** |
 | | |
 |---|---|
 | Period | September – October 2026 (Fall 2026, in progress) |
@@ -17,6 +41,26 @@ A multidimensional data warehouse design, its implementation as a SQL Server Ana
 |---|---|
 | `dataproj1/Project_1/` | Project 1: MultiDim conceptual schema (PDF and editable draw.io), exported SSAS project, design notes |
 | `lab3/` | Lab 3: MDX queries against the cube, with a result screenshot |
+
+## Cube structure
+
+```mermaid
+flowchart LR
+    IS(["Internet Sales"]):::fact
+    SQ(["Sales Quota"]):::fact
+    IS --- D1["Date · order, due, ship"]
+    IS --- PR["Product"]
+    IS --- CU["Customer"]
+    IS --- ST["Sales Territory"]
+    IS --- CY["Currency"]
+    SQ --- EM["Employee"]
+    SQ --- D1
+    RE["Reseller"]
+    ORG["Organization"]
+    classDef fact fill:#6366F1,color:#ffffff,stroke:#4338CA
+```
+
+Reseller and Organization are defined but not yet linked to a fact.
 
 ## My role
 
