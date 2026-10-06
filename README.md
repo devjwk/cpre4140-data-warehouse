@@ -1,15 +1,11 @@
 <div align="center">
 
-# DATA WAREHOUSE DESIGN
+<img src="assets/banner.svg" alt="DATA WAREHOUSE DESIGN — From nine requirements to a cube you can query" width="100%">
 
-### From nine requirements to a cube you can query
-
-**SQL Server · SSAS · MDX**
-
-![Database](https://img.shields.io/badge/Database-SQL%20Server-6366F1?style=flat-square)
-![Cube](https://img.shields.io/badge/Cube-SSAS%20multidimensional-0F172A?style=flat-square)
-![Queries](https://img.shields.io/badge/Queries-MDX-0891B2?style=flat-square)
-![Stage](https://img.shields.io/badge/Stage-In%20progress-F59E0B?style=flat-square)
+![Database](https://img.shields.io/badge/Database-SQL%20Server-047857?style=flat-square&labelColor=022C22)
+![Cube](https://img.shields.io/badge/Cube-SSAS%20multidimensional-064E3B?style=flat-square&labelColor=022C22)
+![Queries](https://img.shields.io/badge/Queries-MDX-0F766E?style=flat-square&labelColor=022C22)
+![Stage](https://img.shields.io/badge/Stage-In%20progress-B45309?style=flat-square&labelColor=022C22)
 
 Iowa State University · CprE/SE 4140 · Fall 2026
 
@@ -46,6 +42,7 @@ Iowa State University · CprE/SE 4140 · Fall 2026
 ## Cube structure
 
 ```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#047857", "primaryTextColor": "#ffffff", "primaryBorderColor": "#022C22", "lineColor": "#94A3B8", "secondaryColor": "#047857", "tertiaryColor": "#022C22", "clusterBkg": "#F8FAFC", "clusterBorder": "#94A3B8", "edgeLabelBackground": "#F1F5F9", "fontFamily": "ui-sans-serif, system-ui, sans-serif"}}}%%
 flowchart LR
     IS(["Internet Sales"]):::fact
     SQ(["Sales Quota"]):::fact
@@ -58,7 +55,7 @@ flowchart LR
     SQ --- D1
     RE["Reseller"]
     ORG["Organization"]
-    classDef fact fill:#6366F1,color:#ffffff,stroke:#4338CA
+    classDef fact fill:#6EE7B7,color:#0B1220,stroke:#022C22
 ```
 
 Reseller and Organization are defined but not yet linked to a fact.
