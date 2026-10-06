@@ -1,0 +1,9 @@
+# Track only my own project and lab work
+/*
+!/.gitignore
+!/dataproj1/
+/dataproj1/*
+!/dataproj1/Project_1/
+!/lab3/
+/lab3/*.pdf
+.DS_Store

@@ -1,0 +1,59 @@
+-- CprE/SE 4140 Lab3 - MDX queries, adapted to cube [Sales] in database Project1 (formerly AW Project1)
+-- Run one query at a time: select it, then Execute (F5).
+
+-- Q1: all measures for customers summarized at the country level
+SELECT [Measures].MEMBERS ON COLUMNS,
+       [Dim Customer].[Customer Geography].[English Country Region Name].MEMBERS ON ROWS
+FROM [Sales]
+
+-- Q2: all measures for all years (order date), customers from Australia, category Bikes
+SELECT [Measures].MEMBERS ON COLUMNS,
+       [Order Date].[Calendar Year].MEMBERS ON ROWS
+FROM [Sales]
+WHERE ([Dim Customer].[Customer Geography].[English Country Region Name].&[Australia],
+       [Dim Product].[Product Categories].[Product Category Key].&[1])
+
+-- Q3: Sales Amount by year and by state, in Canada and France
+SELECT [Order Date].[Calendar Year].MEMBERS ON COLUMNS,
+       NON EMPTY {[Dim Customer].[Customer Geography].[English Country Region Name].&[Canada].CHILDREN,
+                  [Dim Customer].[Customer Geography].[English Country Region Name].&[France].CHILDREN} ON ROWS
+FROM [Sales]
+WHERE [Measures].[Sales Amount]
+
+-- Q4: Sales Amount for Seaford and all its ancestors
+SELECT [Measures].[Sales Amount] ON COLUMNS,
+       ASCENDANTS([Dim Customer].[Customer Geography].[English Country Region Name].&[Australia].&[Victoria].&[Seaford]) ON ROWS
+FROM [Sales]
+
+-- Q5: ancestor of Seaford at the state level
+SELECT [Measures].[Sales Amount] ON COLUMNS,
+       ANCESTOR([Dim Customer].[Customer Geography].[English Country Region Name].&[Australia].&[Victoria].&[Seaford],
+                [Dim Customer].[Customer Geography].[State Province Name]) ON ROWS
+FROM [Sales]
+
+-- Q6: static named set - EU countries
+WITH SET [EU Countries] AS
+  {[Dim Customer].[Customer Geography].[English Country Region Name].&[France],
+   [Dim Customer].[Customer Geography].[English Country Region Name].&[Germany],
+   [Dim Customer].[Customer Geography].[English Country Region Name].&[United Kingdom]}
+SELECT [Measures].MEMBERS ON COLUMNS,
+       [EU Countries] ON ROWS
+FROM [Sales]
+
+-- Q7: dynamic named set - top five selling products
+-- (this cube has no Unit Price measure, so it is left out of the columns)
+WITH SET TopFiveProducts AS
+  TOPCOUNT([Dim Product].[Product Key].[Product Key].MEMBERS, 5, [Measures].[Sales Amount])
+SELECT {[Measures].[Order Quantity], [Measures].[Sales Amount]} ON COLUMNS,
+       TopFiveProducts ON ROWS
+FROM [Sales]
+
+-- TASK (to submit): top 5 selling products in France
+WITH SET TopFiveProductsFrance AS
+  TOPCOUNT([Dim Product].[Product Key].[Product Key].MEMBERS, 5,
+           ([Measures].[Sales Amount],
+            [Dim Customer].[Customer Geography].[English Country Region Name].&[France]))
+SELECT {[Measures].[Order Quantity], [Measures].[Sales Amount]} ON COLUMNS,
+       TopFiveProductsFrance ON ROWS
+FROM Sales
+WHERE [Dim Customer].[Customer Geography].[English Country Region Name].&[France]
