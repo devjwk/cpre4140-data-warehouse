@@ -26,6 +26,7 @@ Iowa State University · CprE/SE 4140 · Fall 2026
 | Measure groups | Dimensions | Requirements covered | Date roles |
 | :---: | :---: | :---: | :---: |
 | **2** | **8** | **9 / 9** | **3** |
+
 | | |
 |---|---|
 | Period | September – October 2026 (Fall 2026, in progress) |
